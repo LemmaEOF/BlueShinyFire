@@ -1,0 +1,9 @@
+{
+  "required": true,
+  "package": "space.bbkr.blueshinyfire.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinFireBlock",
+    "MixinSoulFireBlock"
+  ]
+}

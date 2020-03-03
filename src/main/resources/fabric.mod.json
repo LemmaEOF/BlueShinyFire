@@ -1,28 +1,20 @@
 {
   "schemaVersion": 1,
-  "id": "starter",
+  "id": "blueshinyfire",
   "version": "${version}",
 
-  "name": "Fabric Starter",
+  "name": "Blue Shiny Fire",
   "icon": "assets/starter/icon.png",
-  "description": "Template for starting out Fabric mods",
+  "description": "Throw a diamond into fire to get blue fire",
   "license": "MIT",
   "contact": {
-    "sources": "https://github.com/CottonMC/FabricStarter"
+    "sources": "https://github.com/Boundarybreaker/BlueShinyFire"
   },
   "environment": "*",
-  "entrypoints": {
-    "main": [
-      "io.github.cottonmc.starter.FabricStarter"
-    ]
-  },
   "mixins": [
-    "mixins.starter.json"
+    "mixins.blueshinyfire.json"
   ],
   "depends": {
     "fabricloader": ">=0.4.0"
-  },
-  "custom": {
-    "modmenu:api": true
   }
 }

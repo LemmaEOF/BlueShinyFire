@@ -5,6 +5,6 @@ public class blueshinyfire implements ModInitializer{
     @Override
     public void onInitialize()
     {
-        Registry.register(Registry.ITEM, new Identifier("blueshinyfire", "soul_dust"), SOULDUST);
+        Registry.register(Registry.ITEM, new Identifier("soulfire", "soul_dust"), SOULDUST);
     } 
 }

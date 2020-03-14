@@ -9,11 +9,8 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldView;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import space.bbkr.blueshinyfire.blueshinyfire;
 
 @Mixin(FireBlock.class)
 public abstract class MixinFireBlock extends AbstractFireBlock {
@@ -29,6 +26,9 @@ public abstract class MixinFireBlock extends AbstractFireBlock {
 			if (entity instanceof ItemEntity) {
 				ItemEntity item = (ItemEntity)entity;
 				if (item.getStack().getItem() == Items.DIAMOND) {
+					world.setBlockState(pos, Blocks.SOUL_FIRE.getDefaultState());
+				}
+				if (item.getStack().getItem() == blueshinyfire.SOULDUST) {
 					world.setBlockState(pos, Blocks.SOUL_FIRE.getDefaultState());
 				}
 			}

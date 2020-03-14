@@ -7,10 +7,19 @@
   "icon": "assets/starter/icon.png",
   "description": "Throw a diamond into fire to get blue fire",
   "license": "MIT",
+  "authors": [
+    "Vortetty",
+    "Boundarybreaker"
+  ],
   "contact": {
     "sources": "https://github.com/Boundarybreaker/BlueShinyFire"
   },
   "environment": "*",
+  "entrypoints": {
+    "main": [
+      "space.bbkr.blueshinyfire.blueshinyfire"
+    ]
+  },
   "mixins": [
     "mixins.blueshinyfire.json"
   ],

@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+	"s"
+  ],
+  "key": {
+	"s": {
+	  "tag": "minecraft:soul_sand"
+	}
+  },
+  "result": {
+	"item": "blueshinyfire:soul_dust",
+	"count": 9
+  }
+}

@@ -27,30 +27,28 @@ public class SoulFlintAndSteelItem extends Item {
 	}
 	
 	public ActionResult useOnBlock(ItemUsageContext context) {
-		PlayerEntity playerEntity = context.getPlayer();
-		IWorld iWorld = context.getWorld();
-		BlockPos blockPos = context.getBlockPos();
-		BlockState blockState = iWorld.getBlockState(blockPos);
-		if (isIgnitable(blockState)) {
-			iWorld.playSound(playerEntity, blockPos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
-			iWorld.setBlockState(blockPos, (BlockState)blockState.with(Properties.LIT, true), 11);
-			if (playerEntity != null) {
-				context.getStack().damage(1, playerEntity, (p) -> {
-					p.sendToolBreakStatus(context.getHand());
-				});
+		PlayerEntity player = context.getPlayer();
+		IWorld world = context.getWorld();
+		BlockPos pos = context.getBlockPos();
+		BlockState state = world.getBlockState(pos);
+		if (isIgnitable(state)) {
+			world.playSound(player, pos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
+			world.setBlockState(pos, state.with(Properties.LIT, true), 11);
+			if (player != null) {
+				context.getStack().damage(1, player, (p) -> p.sendToolBreakStatus(context.getHand()));
 			}
 			
 			return ActionResult.SUCCESS;
 		} else {
-			BlockPos blockPos2 = blockPos.offset(context.getSide());
-			if (canIgnite(iWorld.getBlockState(blockPos2), iWorld, blockPos2)) {
-				iWorld.playSound(playerEntity, blockPos2, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
-				BlockState blockState2 = Blocks.SOUL_FIRE.getDefaultState();
-				iWorld.setBlockState(blockPos2, blockState2, 11);
-				ItemStack itemStack = context.getStack();
-				if (playerEntity instanceof ServerPlayerEntity) {
-					Criterions.PLACED_BLOCK.trigger((ServerPlayerEntity)playerEntity, blockPos2, itemStack);
-					itemStack.damage(1, playerEntity, (p) -> {
+			BlockPos firePos = pos.offset(context.getSide());
+			if (canIgnite(world.getBlockState(firePos), world, firePos)) {
+				world.playSound(player, firePos, SoundEvents.ITEM_FLINTANDSTEEL_USE, SoundCategory.BLOCKS, 1.0F, RANDOM.nextFloat() * 0.4F + 0.8F);
+				BlockState fireState = Blocks.SOUL_FIRE.getDefaultState();
+				world.setBlockState(firePos, fireState, 11);
+				ItemStack stack = context.getStack();
+				if (player instanceof ServerPlayerEntity) {
+					Criterions.PLACED_BLOCK.trigger((ServerPlayerEntity)player, firePos, stack);
+					stack.damage(1, player, (p) -> {
 						p.sendToolBreakStatus(context.getHand());
 					});
 				}
@@ -63,21 +61,18 @@ public class SoulFlintAndSteelItem extends Item {
 	}
 	
 	public static boolean isIgnitable(BlockState state) {
-		return state.getBlock() == Blocks.CAMPFIRE && !(Boolean)state.get(Properties.WATERLOGGED) && !(Boolean)state.get(Properties.LIT);
+		return state.getBlock() == Blocks.CAMPFIRE && !state.get(Properties.WATERLOGGED) && !state.get(Properties.LIT);
 	}
 	
 	public static boolean canIgnite(BlockState block, IWorld world, BlockPos pos) {
-		BlockState blockState = AbstractFireBlock.getState(world, pos);
-		boolean bl = false;
-		Iterator var5 = Type.HORIZONTAL.iterator();
-		
-		while(var5.hasNext()) {
-			Direction direction = (Direction)var5.next();
-			if (world.getBlockState(pos.offset(direction)).getBlock() == Blocks.OBSIDIAN && ((NetherPortalBlock)Blocks.NETHER_PORTAL).createAreaHelper(world, pos) != null) {
-				bl = true;
+		BlockState state = AbstractFireBlock.getState(world, pos);
+		boolean makePortal = false;
+		for (Direction dir : Type.HORIZONTAL) {
+			if (world.getBlockState(pos.offset(dir)).getBlock() == Blocks.OBSIDIAN && ((NetherPortalBlock)Blocks.NETHER_PORTAL).createAreaHelper(world, pos) != null) {
+				makePortal = true;
 			}
 		}
 		
-		return block.isAir() && (blockState.canPlaceAt(world, pos) || bl);
+		return block.isAir() && (state.canPlaceAt(world, pos) || makePortal);
 	}
 }

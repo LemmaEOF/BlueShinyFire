@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import space.bbkr.blueshinyfire.blueshinyfire;
+import space.bbkr.blueshinyfire.BlueShinyFire;
 
 @Mixin(SoulFireBlock.class)
 public abstract class MixinSoulFireBlock extends AbstractFireBlock {
@@ -34,11 +34,11 @@ public abstract class MixinSoulFireBlock extends AbstractFireBlock {
 		if (!entity.isFireImmune()) {
 			if (entity instanceof ItemEntity) {
 				ItemEntity item = (ItemEntity)entity;
-				if (item.getStack().getItem() == blueshinyfire.SAWDUST) {
+				if (BlueShinyFire.DESOULIFYING.contains(item.getStack().getItem())) {
 					world.setBlockState(pos, Blocks.FIRE.getDefaultState());
 				}
-				if (item.getStack().getItem() == Items.GLOWSTONE_DUST) {
-					//world.setBlockState(pos, blueshinyfire.SOULFIREBRIGHT.getDefaultState());
+				if (BlueShinyFire.BRIGHTENING.contains(item.getStack().getItem())) {
+					world.setBlockState(pos, BlueShinyFire.BRIGHT_SOUL_FIRE.getDefaultState());
 				}
 			}
 		}

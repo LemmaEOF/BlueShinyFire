@@ -5,11 +5,11 @@
   ],
   "key": {
 	"s": {
-	  "tag": "minecraft:soul_soil"
+	  "item": "minecraft:soul_sand"
 	}
   },
   "result": {
 	"item": "blueshinyfire:soul_dust",
-	"count": 36
+	"count": 9
   }
 }

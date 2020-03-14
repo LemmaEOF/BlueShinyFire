@@ -17,13 +17,17 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "space.bbkr.blueshinyfire.blueshinyfire"
+      "space.bbkr.blueshinyfire.BlueShinyFire"
+    ],
+    "client": [
+      "space.bbkr.blueshinyfire.BlueShinyFireClient"
     ]
   },
   "mixins": [
     "mixins.blueshinyfire.json"
   ],
   "depends": {
-    "fabricloader": ">=0.4.0"
+    "fabricloader": ">=0.4.0",
+    "fabric": "*"
   }
 }

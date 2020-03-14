@@ -7,10 +7,10 @@
   ],
   "key": {
 	"s": {
-	  "tag": "blueshinyfire:soul_dust"
+	  "item": "blueshinyfire:soul_dust"
 	},
 	"f": {
-	  "tag": "minecraft:flint_and_steel"
+	  "item": "minecraft:flint_and_steel"
 	}
   },
   "result": {

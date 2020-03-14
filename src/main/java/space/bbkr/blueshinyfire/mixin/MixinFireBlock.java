@@ -6,11 +6,10 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.FireBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
-import space.bbkr.blueshinyfire.blueshinyfire;
+import space.bbkr.blueshinyfire.BlueShinyFire;
 
 @Mixin(FireBlock.class)
 public abstract class MixinFireBlock extends AbstractFireBlock {
@@ -25,10 +24,7 @@ public abstract class MixinFireBlock extends AbstractFireBlock {
 		if (!entity.isFireImmune()) {
 			if (entity instanceof ItemEntity) {
 				ItemEntity item = (ItemEntity)entity;
-				if (item.getStack().getItem() == Items.DIAMOND) {
-					world.setBlockState(pos, Blocks.SOUL_FIRE.getDefaultState());
-				}
-				if (item.getStack().getItem() == blueshinyfire.SOULDUST) {
+				if (BlueShinyFire.SOULIFYING.contains(item.getStack().getItem())) {
 					world.setBlockState(pos, Blocks.SOUL_FIRE.getDefaultState());
 				}
 			}

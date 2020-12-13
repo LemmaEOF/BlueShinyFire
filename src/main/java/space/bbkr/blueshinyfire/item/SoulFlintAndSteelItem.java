@@ -1,6 +1,6 @@
 package space.bbkr.blueshinyfire.item;
 
-import net.minecraft.advancement.criterion.Criterions;
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.block.AbstractFireBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -47,7 +47,7 @@ public class SoulFlintAndSteelItem extends Item {
 				world.setBlockState(firePos, fireState, 11);
 				ItemStack stack = context.getStack();
 				if (player instanceof ServerPlayerEntity) {
-					Criterions.PLACED_BLOCK.trigger((ServerPlayerEntity)player, firePos, stack);
+					Criteria.PLACED_BLOCK.trigger((ServerPlayerEntity)player, firePos, stack);
 					stack.damage(1, player, (p) -> {
 						p.sendToolBreakStatus(context.getHand());
 					});

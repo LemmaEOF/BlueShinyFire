@@ -6,7 +6,6 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.SoulFireBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
-import net.minecraft.item.Items;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
